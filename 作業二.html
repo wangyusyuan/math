@@ -1,0 +1,77 @@
+<!doctype><html>
+<head>
+	<title>數學運算</title>
+	<style type="text/css">
+	body {
+    		font-family:微軟正黑體;
+	}
+	h2 { 
+    		font-size:18pt;
+	}
+	table {
+    		font-size:15pt;
+    		width: 40%;
+   		margin: 0 auto;
+    		text-align: center;
+	}
+	</style>
+</head>
+<body>
+	<table>
+		<caption><h2>解二元一次聯立方程式</h2></caption>
+		<tr><td><input type="text" id="A1" size="6"> X</td><td>+</td><td><input type="text" id="B1" size="6"> Y</td>
+		<td>=</td><td><input type="text" id="C1" size="6"></td></tr>
+		<tr><td><input type="text" id="A2" size="6"> X</td><td>+</td><td><input type="text" id="B2" size="6"> Y</td>
+		<td>=</td><td><input type="text" id="C2" size="6"></td></tr>
+		<tr><td></td><td></td><td><input type="button" value="解" onclick="sol1()"></td><td></td><td></td></tr>
+		<tr><td colspan="5">X = <input type="text" id="X" size="6"> &nbsp&nbspY = <input type="text" id="Y" size="6"></td></tr>
+	</table><br><br>
+	<table>
+		<caption><h2>計算2x2矩陣行列式值與特徵值</h2></caption>
+		<tr><td rowspan="2">A</td><td rowspan="2">=</td><td rowspan="2">[</td><td><input type="text" id="A11" size="6"> <input type="text" id="A12" size="6"></td><td rowspan="2">]</td></tr>
+		<tr><td><input type="text" id="A21" size="6"> <input type="text" id="A22" size="6"></td></tr>
+		<tr><td></td><td></td><td></td><td><input type="button" value="解" onclick="sol2()"></td><td></td></tr>
+		<tr><td>det A</td><td>=</td><td></td><td><input type="text" id="DetA" size="6"></td><td></td></tr>
+		<tr><td>eigenvalue</td><td>=</td><td></td><td><input type="text" id="Eigenvalue1" size="6"></td><td></td></tr>
+		<tr><td>eigenvalue</td><td>=</td><td></td><td><input type="text" id="Eigenvalue2" size="6"></td><td></td></tr>
+	</table>
+
+	<script>
+		function sol1(){
+			var a1=parseInt(document.getElementById("A1").value);
+			var b1=parseInt(document.getElementById("B1").value);
+			var c1=parseInt(document.getElementById("C1").value);
+			var a2=parseInt(document.getElementById("A2").value);
+			var b2=parseInt(document.getElementById("B2").value);
+			var c2=parseInt(document.getElementById("C2").value);
+			var det=a1*b2-a2*b1;
+
+			if(det!=0){
+				var x=(b2*c1-b1*c2)/det;
+				var y=(a1*c2-a2*c1)/det;
+				document.getElementById("X").value=x;
+				document.getElementById("Y").value=y;
+			}else if(det==0 && (a1/a2==b1/b2) && (a1/a2==c1/c2)){
+				document.getElementById("X").value="無限多解";
+				document.getElementById("Y").value="無限多解";
+			}else{
+				document.getElementById("X").value="無解";
+				document.getElementById("Y").value="無解";
+			}
+		}
+		function sol2(){
+			var a11=parseInt(document.getElementById("A11").value);
+			var a12=parseInt(document.getElementById("A12").value);
+			var a21=parseInt(document.getElementById("A21").value);
+			var a22=parseInt(document.getElementById("A22").value);
+			var detA=a11*a22-a12*a21;
+			var eigenvalue1=(a11+a22+Math.sqrt((a11+a22)**2-4*detA))/2;
+			var eigenvalue2=(a11+a22-Math.sqrt((a11+a22)**2-4*detA))/2;
+
+			document.getElementById("DetA").value=detA;
+			document.getElementById("Eigenvalue1").value=eigenvalue1;
+			document.getElementById("Eigenvalue2").value=eigenvalue2;
+		}
+	</script>
+</body>
+</html>
